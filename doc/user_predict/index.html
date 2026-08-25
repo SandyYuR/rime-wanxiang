@@ -1,0 +1,4843 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="万象拼音 Rime 输入方案与配置文档">
+      
+      
+      
+        <link rel="canonical" href="https://amzxyz.github.io/rime-wanxiang/doc/user_predict/">
+      
+      
+        <link rel="prev" href="../super_lookup/">
+      
+      
+        <link rel="next" href="../input_statistics/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../material/leaf">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>语境预测 - 万象拼音</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#user-predict" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="万象拼音" class="md-header__button md-logo" aria-label="万象拼音" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            万象拼音
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              语境预测
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到暗黑模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到暗黑模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="切换到亮色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到亮色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/amzxyz/rime-wanxiang" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    amzxyz/rime-wanxiang
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  快速上手
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../rime_tree/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  特色功能
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../shijian/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Lua 扩展
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../Rime%E8%AE%BE%E8%AE%A1%E9%80%BB%E8%BE%91%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%93%B2%E5%AD%A6/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  进阶配置
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../2026-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  项目动态
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="万象拼音" class="md-nav__button md-logo" aria-label="万象拼音" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    万象拼音
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/amzxyz/rime-wanxiang" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    amzxyz/rime-wanxiang
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速上手
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    快速上手
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    方案介绍与版本对比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../weasel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Weasel 小狼毫
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    macOS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    macOS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squirrel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Squirrel 鼠须管
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fcitx5-mac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fcitx5 macOS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fcitx5-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fcitx5 Linux
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ibus-rime.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IBus Rime
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    iOS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    iOS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hamster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hamster 仓输入法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hamster3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hamster3 元书输入法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Android
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Android
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trime 同文输入法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fcitx5-android/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fcitx5 Android
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HarmonyOS NEXT
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    HarmonyOS NEXT
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chaoyue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    超越输入法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶安装
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    进阶安装
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    万象工具链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    东风破 Plum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    手动设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特色功能
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    特色功能
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rime_tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    万象目录架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dicts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中英词库说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shortcut/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快捷键说明
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aux_code/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    辅助码系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reverse_lookup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    生僻字反查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../english/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中英与混合编码
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../layouts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9/14/18键转写
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fuzzy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    模糊音配置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../custom_words/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高阶造词
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../word_creation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    错音错字提示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../XCompose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    符号合成
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lua 扩展
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lua 扩展
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shijian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时间日期
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../super_comment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    超级注释
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../super_tips/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    超级提示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../super_lookup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    候选辅筛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语境预测
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    语境预测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#user-predict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、User Predict 现在负责什么？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、先用一个简单例子理解“学习”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、总开关：prediction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、桌面端与移动端并不是同一种显示方式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、桌面端与移动端并不是同一种显示方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        桌面端
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        移动端
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Post：上屏后的联想预测
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、Post：上屏后的联想预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        普通按键会结束当前联想界面
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数字键
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reorder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、Reorder：输入中的上下文调频
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、量词提权
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、量词提权">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认量词表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关闭量词提权
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、回头码兜底交换
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、回头码兜底交换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        当前 Base 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、当前真正的防污染机制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="九、当前真正的防污染机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 上下文超时
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 单次上屏超过 4 字不进行普通关联学习
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 连续重复不学习
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-aba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. ABA 折返过滤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 非中文内容切断语境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 标点隔离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、四字词还有一条直接学习通道
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s-2-1-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、S / 2 / 1 / P 四级查询
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十二、S-Gram：手工维护的静态关联
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十二、S-Gram：手工维护的静态关联">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        权重
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v12-s-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十三、v12 新增：S-Gram 长上文前缀桥接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十三、v12 新增：S-Gram 长上文前缀桥接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        桥接限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十四、2-Gram：双上文关联
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十五、1-Gram：主要动态关联
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十六、P-Gram：长上文后缀兜底
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十七、当前排名方式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十八、现在如何控制数据库规模？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十九、c 值与负墓碑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十九、c 值与负墓碑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正 c
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        负 c
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十、上屏后立即退格：事务回滚
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十、上屏后立即退格：事务回滚">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        防止误回滚旧事务
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十一、主动删除预测候选
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十一、主动删除预测候选">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#s-gram_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        S-Gram 不允许这样删除
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outpredict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十二、导出 /outpredict
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inpredict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十三、导入 /inpredict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十三、导入 /inpredict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        合并规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s-gram_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十四、如何手工添加 S-Gram？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十四、如何手工添加 S-Gram？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        长句示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十五、当前真正有效的 YAML 参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-patch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十六、推荐的 Custom Patch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prediction_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十七、如何固定开启 prediction？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十八、当前版本可以怎样理解？
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../input_statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    输入统计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../super_replacer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    超级替换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../super_sequence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    手动排序
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick_symbol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速符号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../paired_symbols/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    成对符号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../super_symbols/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    超级符号
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../super_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按键处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../charset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    字符过滤
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../candidate_slicer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    候选切割
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RUNV/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    魔法字母
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../profile-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    性能评测
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进阶配置
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    进阶配置
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Rime%E8%AE%BE%E8%AE%A1%E9%80%BB%E8%BE%91%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%93%B2%E5%AD%A6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rime 工作机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../patch%E6%96%B9%E6%B3%95%E8%AE%BA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Patch 方法论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schema_custom/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义万象方案
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dicts_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    词库管理与同步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RIME%E9%85%8D%E7%BD%AE%E6%89%8B%E5%86%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rime 配置手册
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RIME%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rime 配置指南
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../key/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    按键映射列表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    项目动态
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    项目动态
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2026-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 年中词库报告
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../400%2Bgram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2026 年中模型更新
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#user-predict_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、User Predict 现在负责什么？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、先用一个简单例子理解“学习”
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、总开关：prediction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、桌面端与移动端并不是同一种显示方式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、桌面端与移动端并不是同一种显示方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        桌面端
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        移动端
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、Post：上屏后的联想预测
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、Post：上屏后的联想预测">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        普通按键会结束当前联想界面
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        数字键
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reorder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、Reorder：输入中的上下文调频
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、量词提权
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、量词提权">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        默认量词表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关闭量词提权
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、回头码兜底交换
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="八、回头码兜底交换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        当前 Base 配置
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        九、当前真正的防污染机制
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="九、当前真正的防污染机制">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 上下文超时
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 单次上屏超过 4 字不进行普通关联学习
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 连续重复不学习
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-aba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. ABA 折返过滤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 非中文内容切断语境
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 标点隔离
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十、四字词还有一条直接学习通道
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s-2-1-p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十一、S / 2 / 1 / P 四级查询
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十二、S-Gram：手工维护的静态关联
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十二、S-Gram：手工维护的静态关联">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        权重
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v12-s-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十三、v12 新增：S-Gram 长上文前缀桥接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十三、v12 新增：S-Gram 长上文前缀桥接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        桥接限制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十四、2-Gram：双上文关联
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十五、1-Gram：主要动态关联
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#p-gram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十六、P-Gram：长上文后缀兜底
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十七、当前排名方式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十八、现在如何控制数据库规模？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        十九、c 值与负墓碑
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="十九、c 值与负墓碑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正 c
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        负 c
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十、上屏后立即退格：事务回滚
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十、上屏后立即退格：事务回滚">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        防止误回滚旧事务
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十一、主动删除预测候选
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十一、主动删除预测候选">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#s-gram_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        S-Gram 不允许这样删除
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outpredict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十二、导出 /outpredict
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inpredict" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十三、导入 /inpredict
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十三、导入 /inpredict">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        合并规则
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#s-gram_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十四、如何手工添加 S-Gram？
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二十四、如何手工添加 S-Gram？">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        长句示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十五、当前真正有效的 YAML 参数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-patch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十六、推荐的 Custom Patch
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prediction_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十七、如何固定开启 prediction？
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二十八、当前版本可以怎样理解？
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="user-predict">语境预测 (User Predict)：上下文联想与候选调频</h1>
+<blockquote>
+<p><strong><code>user_predict.lua</code> 由 Processor、Translator 和 Filter 三部分协同工作：记录用户实际输入形成的上下文关联，在移动端按需生成上屏后联想，在桌面端或移动端 <code>reorder</code> 模式中根据上文重新调整当前候选顺序。</strong></p>
+</blockquote>
+<p>当前版本采用稳定记录模型：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>稳定 code + 候选文本
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        ↓
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>c 值记录有效学习强度
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        ↓
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>负 c 表示删除墓碑
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        ↓
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>同一层级按 c 值排名
+</code></pre></div>
+<p>因此，当前文档应以 <strong><code>c</code> 值计数、负值墓碑、上下文隔离、分支裁剪和事务回滚</strong> 为核心理解 User Predict。</p>
+<hr />
+<h2 id="user-predict_1">一、User Predict 现在负责什么？</h2>
+<p>当前模块主要承担三类用户可感知功能：</p>
+<ol>
+<li><strong>上屏后联想（Post Predict）</strong></li>
+<li><strong>输入中的上下文调频（Context Reorder）</strong></li>
+<li><strong>数字后的量词提权（Classifier Boost）</strong></li>
+</ol>
+<p>此外还包含：</p>
+<ul>
+<li>回头码兜底交换</li>
+<li>S / 2 / 1 / P 四级关联查询</li>
+<li>S-Gram 长上文前缀桥接</li>
+<li>关联学习与分支裁剪</li>
+<li>上屏后立即退格的数据库回滚</li>
+<li>预测候选主动删除</li>
+<li>导入 / 导出</li>
+<li>多端数据合并所需的稳定记录与墓碑状态</li>
+</ul>
+<hr />
+<h2 id="_1">二、先用一个简单例子理解“学习”</h2>
+<p>一次有效的连续上下文即可建立关联。</p>
+<p>例如测试：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>家族
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>族长
+</code></pre></div>
+<p>注意两次上屏之间不要超过当前：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">context_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000</span>
+</code></pre></div>
+<p>也就是默认约 5 秒的上下文窗口。</p>
+<p>完成这次连续输入后，数据库已经可以形成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>家族 → 族长
+</code></pre></div>
+<p>的有效关联。</p>
+<p>之后再次输入并上屏：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>家族
+</code></pre></div>
+<p>如果开启了预测总开关：</p>
+<ul>
+<li>移动端 <code>post</code> 模式可以直接出现“族长”联想；</li>
+<li><code>reorder</code> 模式下，再输入“族长”对应编码时，“族长”可以根据上下文被提前。</li>
+</ul>
+<p>第一次有效学习会把对应关联写成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>c=1
+</code></pre></div>
+<p>后续再次学习同一关联时继续递增：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>c=2
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>c=3
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>...
+</code></pre></div>
+<hr />
+<h2 id="prediction">三、总开关：<code>prediction</code></h2>
+<p>User Predict 受 Rime Option：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>prediction
+</code></pre></div>
+<p>统一控制。</p>
+<p>当前 Base 方案中：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prediction</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">states</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">预测关</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">预测开</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>如果这个 Option 关闭：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>不生成 Post 联想
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>不执行上下文 Reorder
+</code></pre></div>
+<p>量词调频也位于同一个 Filter 中，并随整体预测 Filter 的运行状态共同工作。</p>
+<hr />
+<h2 id="_2">四、桌面端与移动端并不是同一种显示方式</h2>
+<h3 id="_3">桌面端</h3>
+<p>当前 Lua 在非移动设备上会直接指定：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>PREDICT_STYLE = reorder
+</code></pre></div>
+<p>因此桌面端开启 <code>prediction</code> 后，默认工作方式就是：</p>
+<p><strong>输入中的上下文候选调频</strong></p>
+<p>而不是上屏后再弹出 <code>›</code> 联想候选。</p>
+<p>换句话说：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>PC
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>prediction = on
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>        ↓
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>自动使用 reorder
+</code></pre></div>
+<p><code>mobile_predict_style</code> 在 PC 上不会改变这一点。</p>
+<h3 id="_4">移动端</h3>
+<p>移动端才读取：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="l l-Scalar l-Scalar-Plain">user_predict/mobile_predict_style</span>
+</code></pre></div>
+<p>支持：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>post
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>reorder
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>off
+</code></pre></div>
+<p>当前 Base 方案配置：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">mobile_predict_style</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">post</span>
+</code></pre></div>
+<p>因此移动端默认使用上屏后联想。</p>
+<hr />
+<h2 id="post">五、Post：上屏后的联想预测</h2>
+<p>当移动端使用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">mobile_predict_style</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">post</span>
+</code></pre></div>
+<p>并且当前上文存在可用预测时，Lua 会在输入区压入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>›
+</code></pre></div>
+<p>作为预测占位符，然后由 User Predict Translator 生成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>type = predict
+</code></pre></div>
+<p>的候选。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>家族
+</code></pre></div>
+<p>上屏后可能出现：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>›
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>1. 族长
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>2. 成员
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>...
+</code></pre></div>
+<p>选择其中一个预测候选后，它会正常上屏，并继续作为新的语境参与后续预测。</p>
+<h3 id="_5">普通按键会结束当前联想界面</h3>
+<p>如果正在显示 <code>›</code> 预测，此时开始正常输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>z
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>a
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>...
+</code></pre></div>
+<p>Lua 会关闭当前预测候选，清掉占位符，再让新的按键继续交给后续 Rime 输入流程。</p>
+<p>因此 Post 模式不会要求先手动关闭预测才能继续打字。</p>
+<h3 id="_6">数字键</h3>
+<p>在非 T9 环境下，预测状态中直接按数字会结束联想并提交对应数字。</p>
+<p>T9 中数字本身属于编码，因此会退出预测状态后把数字继续交还给 T9 输入流程。</p>
+<hr />
+<h2 id="reorder">六、Reorder：输入中的上下文调频</h2>
+<p><code>reorder</code> 不会生成 <code>›</code> 占位符。</p>
+<p>它先根据刚刚上屏的上下文查询预测记录，再在你开始输入下一个词时扫描当前正常候选。</p>
+<p>如果某个正常候选正好存在于预测结果中，就根据预测排名将它提前。</p>
+<p>例如已经形成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>家族 → 族长
+</code></pre></div>
+<p>的关联。</p>
+<p>之后：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>上屏：家族
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>输入：zuzhang
+</code></pre></div>
+<p>原始候选可能是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>1. 组长
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>2. 族长
+</code></pre></div>
+<p>上下文调频后可以变成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>1. 族长
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>2. 组长
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Reorder 只重新组织正常候选</p>
+<p>当前 Filter 主要处理：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>user_phrase
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>phrase
+</code></pre></div>
+<p>两类正常候选。</p>
+<p>它不是对候选列表中的所有特殊类型进行无条件排序。</p>
+</div>
+<hr />
+<h2 id="_7">七、量词提权</h2>
+<p>User Predict Filter 还包含独立的数字后量词提权。</p>
+<p>例如已经直接输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>1
+</code></pre></div>
+<p>随后输入某个与量词同码的拼音时，只要当前候选文字存在于量词表中，就可以被优先提升。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>1 + jin
+</code></pre></div>
+<p>可以优先得到：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>斤
+</code></pre></div>
+<p>而不是普通语境下更高频的其他同码字。</p>
+<h3 id="_8">默认量词表</h3>
+<p>当前方案通过：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="l l-Scalar l-Scalar-Plain">user_predict/custom_classifiers</span>
+</code></pre></div>
+<p>提供自定义列表，例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nt">custom_classifiers</span><span class="p">:</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">个只名位口人头匹条群批伙多</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">张把件台部块根颗粒滴片朵面扇顶栋座所辆艘架盏支枝杆</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">双对副套打串束排阵堆叠摞扎</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">杯瓶盒包份碗锅盆桶袋罐盘</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">次场局回趟顿番遍声项宗桩款步招</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">年月天周岁秒分刻代期届任夜季</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">本册篇首句段卷幅节堂门帖字行</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">米寸尺里斤两吨克升元角毛笔百千万亿</span>
+</code></pre></div>
+<p>Lua 会把列表内容合并成快速查找表。</p>
+<h3 id="_9">关闭量词提权</h3>
+<p>如果不需要，可以把列表清空：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nt">patch</span><span class="p">:</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="s">"user_predict/custom_classifiers"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</code></pre></div>
+<p>这样量词查找表为空，就不会执行数字后的分类提权。</p>
+<hr />
+<h2 id="_10">八、回头码兜底交换</h2>
+<p>当前版本仍然保留：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="l l-Scalar l-Scalar-Plain">user_predict/enable_fallback_reorder</span>
+</code></pre></div>
+<p>这个功能不是正常的 N-Gram 上下文预测，而是针对“删掉当前编码后重新输入同一编码”的回头场景。</p>
+<p>简单理解：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>输入一串编码
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>      ↓
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>退格回删
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>      ↓
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>再次输入相同编码
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>      ↓
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>首二候选尝试交换
+</code></pre></div>
+<p>它主要用于同码候选首次顺序不合预期时的快速兜底。</p>
+<h3 id="base">当前 Base 配置</h3>
+<p>当前方案中：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nt">enable_fallback_reorder</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+<p>也就是说，<strong>代码功能存在，但当前 Base 默认没有开启。</strong></p>
+<p>需要使用时：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nt">patch</span><span class="p">:</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="s">"user_predict/enable_fallback_reorder"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Fallback 与正常上下文 Reorder 相互独立</p>
+<p>当回头码兜底实际触发时，Lua 会暂时关闭：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>正常上下文 reorder
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>量词提权
+</code></pre></div>
+<p>然后只执行首二候选的兜底交换，避免多套调序同时干预。</p>
+</div>
+<hr />
+<h2 id="_11">九、当前真正的防污染机制</h2>
+<p>当前版本通过输入语境过滤减少无效学习。</p>
+<h3 id="1">1. 上下文超时</h3>
+<p>默认：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nt">context_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000</span>
+</code></pre></div>
+<p>两次上屏之间超过这个时间，就切断当前记忆链。</p>
+<p>因此：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>家族
+</code></pre></div>
+<p>过很久之后再输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>族长
+</code></pre></div>
+<p>不会被强行视为同一段即时语境。</p>
+<h3 id="2-4">2. 单次上屏超过 4 字不进行普通关联学习</h3>
+<p>当前基础规则：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>单次上屏 &gt; 4 个汉字
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>→ 不记录本次普通上下文关联
+</code></pre></div>
+<p>防止超长整句直接大量污染短上下文模型。</p>
+<h3 id="3">3. 连续重复不学习</h3>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>你好 → 你好
+</code></pre></div>
+<p>不会继续制造自循环关联。</p>
+<h3 id="4-aba">4. ABA 折返过滤</h3>
+<p>类似：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>A → B → A
+</code></pre></div>
+<p>的快速折返会被识别，避免把短时间来回修改误学成高价值关联。</p>
+<h3 id="5">5. 非中文内容切断语境</h3>
+<p>当前普通学习主要接受：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>中文字符
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>部分允许的语气标点
+</code></pre></div>
+<p>如果上屏内容属于其他不适合学习的文本，会重置当前语境链。</p>
+<h3 id="6">6. 标点隔离</h3>
+<p>普通句末标点通常意味着语境结束。</p>
+<p>但对于：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>吧
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>呢
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>吗
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>啊
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>呀
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a>...
+</code></pre></div>
+<p>这类常见句末助词，Lua 保留了白名单，使：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>助词 + 标点
+</code></pre></div>
+<p>能够正常完成句尾处理，而不是在助词上屏时提前产生异常关联。</p>
+<hr />
+<h2 id="_12">十、四字词还有一条直接学习通道</h2>
+<p>当前 v12 对<strong>恰好四个汉字</strong>的最终上屏文本提供专门学习逻辑。</p>
+<p>例如一次上屏：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>家族族长
+</code></pre></div>
+<p>如果它正好由四个汉字构成，会自动按：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>前 2 字 → 后 2 字
+</code></pre></div>
+<p>建立 1-Gram：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>家族 → 族长
+</code></pre></div>
+<p>这条记录不要求该四字文本原本在候选列表里处于什么位置。</p>
+<p>也就是说，四字纯中文内容可以在第一次有效上屏后直接建立：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>2 + 2
+</code></pre></div>
+<p>关联。</p>
+<hr />
+<h2 id="s-2-1-p">十一、S / 2 / 1 / P 四级查询</h2>
+<p>当前查询仍然使用四层模型：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>S-Gram
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>   ↓
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>2-Gram
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>   ↓
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>1-Gram
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>   ↓
+<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>P-Gram
+</code></pre></div>
+<p>不同层级使用不同的基础倍率：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>S : × 1,000,000
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>2 : × 10,000
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>1 : × 100
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>P : × 1
+</code></pre></div>
+<p>候选基础权重则直接来自记录中的正 <code>c</code> 值。</p>
+<hr />
+<h2 id="s-gram">十二、S-Gram：手工维护的静态关联</h2>
+<p>S-Gram 不是运行时自动学习层。</p>
+<p>它专门用于：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>手工导入的固定续句
+<a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>诗词
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>专有表达
+<a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>预设长句
+</code></pre></div>
+<p>当前运行时：</p>
+<ul>
+<li>只读取 S 记录</li>
+<li>不自动学习 S</li>
+<li>不自动增加 S 的 <code>c</code></li>
+<li>不参与普通分支淘汰</li>
+<li>删除预测候选时也不会给 S 写删除墓碑</li>
+</ul>
+<p>因此它属于<strong>长期静态记忆</strong>。</p>
+<h3 id="_13">权重</h3>
+<p>查询时：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>S c 值 × 1,000,000
+</code></pre></div>
+<p>因此相对于动态 2 / 1 / P 层拥有最高优先级。</p>
+<p>但它并不是“某个不可修改的隐藏后门”，而是一类明确的数据记录。</p>
+<hr />
+<h2 id="v12-s-gram">十三、v12 新增：S-Gram 长上文前缀桥接</h2>
+<p>假设手工导入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>S;床前明月光    疑是地上霜
+</code></pre></div>
+<p>完整关联本来是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>床前明月光 → 疑是地上霜
+</code></pre></div>
+<p>但用户可能只先输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>床前
+</code></pre></div>
+<p>v12 会扫描同一个 S 家族，发现存在更长的静态上文：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>床前明月光
+</code></pre></div>
+<p>于是可以先给出桥接候选：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>明月光
+</code></pre></div>
+<p>选择这个桥接候选后，Lua 会保留完整强上下文：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>床前明月光
+</code></pre></div>
+<p>然后优先查询：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>S;床前明月光
+</code></pre></div>
+<p>继续得到：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>疑是地上霜
+</code></pre></div>
+<p>可以理解为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>床前
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a>  ↓
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a>桥接：明月光
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a>  ↓
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a>完整静态上文：床前明月光
+<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a>  ↓
+<a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a>续句：疑是地上霜
+</code></pre></div>
+<h3 id="_14">桥接限制</h3>
+<p>当前源码内部限制包括：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>最短前缀：2 字
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>最大剩余桥接长度：7 字
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a>单次 S 家族扫描：20 条
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>纯桥接最多：3 条
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a>普通候选已存在时最多插入：2 条
+</code></pre></div>
+<p>这些属于当前内部策略，暂时没有对应 YAML 参数。</p>
+<hr />
+<h2 id="2-gram">十四、2-Gram：双上文关联</h2>
+<p>2-Gram 使用最近两个上屏单元作为上下文：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>u0 + u1 → 下一个词
+</code></pre></div>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>但是 + 你 → 不能
+</code></pre></div>
+<p>查询倍率：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>× 10,000
+</code></pre></div>
+<p>为了限制上下文规模，当前只有满足：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>u1 长度 ≤ 4
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>u0 + u1 总长度 ≤ 5
+</code></pre></div>
+<p>时才写入 / 查询 2-Gram。</p>
+<hr />
+<h2 id="1-gram">十五、1-Gram：主要动态关联</h2>
+<p>1-Gram 是最直接的：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>上一个词 → 下一个词
+</code></pre></div>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>家族 → 族长
+</code></pre></div>
+<p>查询倍率：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>× 100
+</code></pre></div>
+<p>当上文长度较长时，查询会从末尾最多 4 个字开始逐级回退：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>4 字后缀
+<a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>→ 3 字后缀
+<a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a>→ 2 字后缀
+</code></pre></div>
+<p>一旦当前回退层已经找到结果，就停止继续向更短后缀下降。</p>
+<hr />
+<h2 id="p-gram">十六、P-Gram：长上文后缀兜底</h2>
+<p>P-Gram 用于保存较长上文的部分后缀关系。</p>
+<p>例如一个较长上文无法直接作为普通 1-Gram 使用时，可以将其后部若干字作为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>P;后缀
+</code></pre></div>
+<p>继续查找下一词。</p>
+<p>查询倍率最低：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>× 1
+</code></pre></div>
+<p>因此它主要承担：</p>
+<p><strong>普通关联没有命中时的抗抖动兜底。</strong></p>
+<p>当一个 P 候选实际被用户继续上屏后，正常的 commit 学习流程又会根据真实上下文重新写入 1 / 2 等动态关联。</p>
+<p>所以不需要再把它描述成一个独立的“P-Gram 手动转正按钮”。</p>
+<hr />
+<h2 id="_15">十七、当前排名方式</h2>
+<p>当前预测权重可以简化为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>Score = c × Gram Multiplier
+</code></pre></div>
+<p>其中：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>S → 1,000,000
+<a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a>2 → 10,000
+<a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a>1 → 100
+<a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a>P → 1
+</code></pre></div>
+<p>记录本身只要：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>c &gt; 0
+</code></pre></div>
+<p>就是有效预测记录。</p>
+<hr />
+<h2 id="_16">十八、现在如何控制数据库规模？</h2>
+<p>当前主要通过：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="nt">max_memory_branches</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+</code></pre></div>
+<p>控制同一上下文前缀下保留的动态分支数量。</p>
+<p>查询某一个动态 Gram 时：</p>
+<ol>
+<li>读取当前前缀下记录</li>
+<li>按 <code>c</code> 降序</li>
+<li>保留前 <code>max_memory_branches</code></li>
+<li>超出的动态记录写入负 <code>c</code> 墓碑</li>
+</ol>
+<p>S-Gram 属于静态数据，不参与这一步动态分支裁剪。</p>
+<p>因此因此，同一上下文下只有排名较高的动态分支继续保持有效状态，超出分支上限的记录会被标记删除。</p>
+<hr />
+<h2 id="c">十九、<code>c</code> 值与负墓碑</h2>
+<p>当前数据库记录采用稳定形式：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>code + 候选
+</code></pre></div>
+<p>记录尾部为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>c=数字 d=0 t=0
+</code></pre></div>
+<h3 id="c_1">正 c</h3>
+<p>表示当前关联有效：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>c=1
+<a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a>c=2
+<a id="__codelineno-80-3" name="__codelineno-80-3" href="#__codelineno-80-3"></a>c=3
+</code></pre></div>
+<p>每次再次学习同一条关联时，绝对值继续增加。</p>
+<h3 id="c_2">负 c</h3>
+<p>表示这条关联已经被删除：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>c=-4
+</code></pre></div>
+<p>删除时不会简单抹掉 raw key，而是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>当前 |c|
+<a id="__codelineno-82-2" name="__codelineno-82-2" href="#__codelineno-82-2"></a>→ +1
+<a id="__codelineno-82-3" name="__codelineno-82-3" href="#__codelineno-82-3"></a>→ 写成负数
+</code></pre></div>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>c=3
+</code></pre></div>
+<p>删除后：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>c=-4
+</code></pre></div>
+<p>如果以后再次重新学习该关联，则会从当前绝对值继续增加，并恢复为正值：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>c=5
+</code></pre></div>
+<p>这样可以避免：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>删除
+<a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a>→ 旧设备同步回来
+<a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a>→ 旧记录重新复活
+</code></pre></div>
+<p>这类状态折返。</p>
+<hr />
+<h2 id="_17">二十、上屏后立即退格：事务回滚</h2>
+<p>当前每次上屏学习时，Lua 会记录本次真正改动了哪些数据库键，以及：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>写入前状态
+<a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>写入后状态
+</code></pre></div>
+<p>如果上屏后没有进行其他正常输入，并在：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a><span class="l l-Scalar l-Scalar-Plain">context_timeout</span>
+</code></pre></div>
+<p>规定的时间窗口内立刻按 Backspace，User Predict 会尝试撤销<strong>刚才这次上屏造成的数据库学习</strong>。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>家族
+<a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a>→ 误选了“组长”
+<a id="__codelineno-89-3" name="__codelineno-89-3" href="#__codelineno-89-3"></a>→ 立即 Backspace
+</code></pre></div>
+<p>对应的刚刚新增 / 增强的预测关联可以一起回滚。</p>
+<div class="admonition note">
+<p class="admonition-title">回滚的是预测数据库事务</p>
+<p>User Predict 负责恢复它自己刚才写入的数据库状态。</p>
+<p>屏幕上文字究竟怎样被 Backspace 删除，仍由当前 Rime 前端和编辑环境共同处理。</p>
+</div>
+<h3 id="_18">防止误回滚旧事务</h3>
+<p>只要上屏后又进行了其他普通按键操作：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>新的学习事务失效
+</code></pre></div>
+<p>后面的 Backspace 不会继续把更早以前的预测学习一起撤销。</p>
+<hr />
+<h2 id="_19">二十一、主动删除预测候选</h2>
+<p>当当前菜单选中：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>type = predict
+</code></pre></div>
+<p>的预测候选时，模块可以响应前端删除通知，也支持带 Control / Shift 的 Delete 或 BackSpace 类按键删除预测关联。</p>
+<p>常见操作可以继续使用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>Ctrl + Delete
+<a id="__codelineno-92-2" name="__codelineno-92-2" href="#__codelineno-92-2"></a>Shift + Delete
+</code></pre></div>
+<p>但数据库层的实际行为不是“物理销毁”，而是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>写入负 c 墓碑
+</code></pre></div>
+<p>并同时处理与当前上文相关的 P-Gram 兜底记录。</p>
+<h3 id="s-gram_1">S-Gram 不允许这样删除</h3>
+<p>如果当前预测来自：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>S-Gram
+</code></pre></div>
+<p>或者只是 S-Gram 生成的虚拟桥接候选，删除逻辑会直接放行，不给它写墓碑。</p>
+<p>静态 S 数据只能通过外部数据文件 / 导入数据自行维护。</p>
+<hr />
+<h2 id="outpredict">二十二、导出 <code>/outpredict</code></h2>
+<p>在任意输入框输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>/outpredict
+</code></pre></div>
+<p>会将当前预测数据库导出到 Rime 用户目录：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>predict_export.txt
+</code></pre></div>
+<p>当前格式为三列：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>code&lt;Tab&gt;word&lt;Tab&gt;record_tail
+</code></pre></div>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>1;家族    族长  c=3 d=0 t=0
+</code></pre></div>
+<p>S-Gram 也使用同一格式：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>S;我的    名字  c=1 d=0 t=0
+</code></pre></div>
+<hr />
+<h2 id="inpredict">二十三、导入 <code>/inpredict</code></h2>
+<p>准备：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>predict_import.txt
+</code></pre></div>
+<p>放在 Rime 用户目录，然后输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>/inpredict
+</code></pre></div>
+<p>即可导入。</p>
+<p>导入时比较 <code>c</code> 的状态强度。</p>
+<h3 id="_20">合并规则</h3>
+<p>假设：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>本地：c=3
+<a id="__codelineno-102-2" name="__codelineno-102-2" href="#__codelineno-102-2"></a>导入：c=5
+</code></pre></div>
+<p>则采用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>c=5
+</code></pre></div>
+<p>如果：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>本地：c=5
+<a id="__codelineno-104-2" name="__codelineno-104-2" href="#__codelineno-104-2"></a>导入：c=-5
+</code></pre></div>
+<p>绝对值相同，则负墓碑优先：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>c=-5
+</code></pre></div>
+<p>因此当前合并原则是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>|c| 更大者优先
+<a id="__codelineno-106-2" name="__codelineno-106-2" href="#__codelineno-106-2"></a>同 |c| 时删除墓碑优先
+</code></pre></div>
+<p>这套逻辑不依赖设备本地时钟。</p>
+<hr />
+<h2 id="s-gram_2">二十四、如何手工添加 S-Gram？</h2>
+<p>S-Gram 推荐通过导入文件维护。</p>
+<p>例如希望：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>我的 → 名字
+</code></pre></div>
+<p>始终作为静态高优先级关联。</p>
+<p>在：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a>predict_import.txt
+</code></pre></div>
+<p>中写：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a>S;我的    名字  c=1 d=0 t=0
+</code></pre></div>
+<p>三个字段之间使用<strong>真实 Tab</strong>。</p>
+<p>然后输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>/inpredict
+</code></pre></div>
+<p>导入即可。</p>
+<h3 id="_21">长句示例</h3>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a>床前明月光 → 疑是地上霜
+</code></pre></div>
+<p>写成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a>S;床前明月光 疑是地上霜   c=1 d=0 t=0
+</code></pre></div>
+<p>导入后除了完整上文命中，还可以利用 v12 的 S 前缀桥接功能。</p>
+<p>S-Gram 当前统一使用：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>S;上文&lt;Tab&gt;续词&lt;Tab&gt;c=... d=0 t=0
+</code></pre></div>
+<hr />
+<h2 id="yaml">二十五、当前真正有效的 YAML 参数</h2>
+<p>v12 当前读取的主要配置如下：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+<th>Lua 回退值 / 当前方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db_name</code></td>
+<td>User Predict 数据库名称</td>
+<td>Lua 回退 <code>lua/predict</code></td>
+</tr>
+<tr>
+<td><code>mobile_predict_style</code></td>
+<td>移动端模式：<code>post / reorder / off</code></td>
+<td>当前 Base：<code>post</code></td>
+</tr>
+<tr>
+<td><code>enable_fallback_reorder</code></td>
+<td>回头码首二候选兜底交换</td>
+<td>Lua 内部默认 <code>true</code>；当前 Base 显式 <code>false</code></td>
+</tr>
+<tr>
+<td><code>max_candidates</code></td>
+<td>Post 联想显示上限及预测结果控制参数</td>
+<td>Lua 回退 <code>5</code>；当前 Base <code>10</code></td>
+</tr>
+<tr>
+<td><code>max_predictions</code></td>
+<td>Post 连续预测链深度上限</td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td><code>max_memory_branches</code></td>
+<td>单一动态上下文最多保留的有效分支</td>
+<td><code>15</code></td>
+</tr>
+<tr>
+<td><code>context_timeout</code></td>
+<td>即时上下文与 Undo 窗口，毫秒</td>
+<td><code>5000</code></td>
+</tr>
+<tr>
+<td><code>custom_classifiers</code></td>
+<td>数字后量词提权字符集</td>
+<td>当前方案自定义列表</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="custom-patch">二十六、推荐的 Custom Patch</h2>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a><span class="nt">patch</span><span class="p">:</span>
+<a id="__codelineno-114-2" name="__codelineno-114-2" href="#__codelineno-114-2"></a><span class="w">  </span><span class="c1"># 移动端：上屏后联想</span>
+<a id="__codelineno-114-3" name="__codelineno-114-3" href="#__codelineno-114-3"></a><span class="w">  </span><span class="s">"user_predict/mobile_predict_style"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"post"</span>
+<a id="__codelineno-114-4" name="__codelineno-114-4" href="#__codelineno-114-4"></a>
+<a id="__codelineno-114-5" name="__codelineno-114-5" href="#__codelineno-114-5"></a><span class="w">  </span><span class="c1"># 开启回头码兜底</span>
+<a id="__codelineno-114-6" name="__codelineno-114-6" href="#__codelineno-114-6"></a><span class="w">  </span><span class="s">"user_predict/enable_fallback_reorder"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-114-7" name="__codelineno-114-7" href="#__codelineno-114-7"></a>
+<a id="__codelineno-114-8" name="__codelineno-114-8" href="#__codelineno-114-8"></a><span class="w">  </span><span class="c1"># 联想显示数量</span>
+<a id="__codelineno-114-9" name="__codelineno-114-9" href="#__codelineno-114-9"></a><span class="w">  </span><span class="s">"user_predict/max_candidates"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-114-10" name="__codelineno-114-10" href="#__codelineno-114-10"></a>
+<a id="__codelineno-114-11" name="__codelineno-114-11" href="#__codelineno-114-11"></a><span class="w">  </span><span class="c1"># Post 连续联想深度</span>
+<a id="__codelineno-114-12" name="__codelineno-114-12" href="#__codelineno-114-12"></a><span class="w">  </span><span class="s">"user_predict/max_predictions"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<a id="__codelineno-114-13" name="__codelineno-114-13" href="#__codelineno-114-13"></a>
+<a id="__codelineno-114-14" name="__codelineno-114-14" href="#__codelineno-114-14"></a><span class="w">  </span><span class="c1"># 单个上下文保留的动态分支数量</span>
+<a id="__codelineno-114-15" name="__codelineno-114-15" href="#__codelineno-114-15"></a><span class="w">  </span><span class="s">"user_predict/max_memory_branches"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+<a id="__codelineno-114-16" name="__codelineno-114-16" href="#__codelineno-114-16"></a>
+<a id="__codelineno-114-17" name="__codelineno-114-17" href="#__codelineno-114-17"></a><span class="w">  </span><span class="c1"># 即时上下文有效时间 / Undo 时间窗口</span>
+<a id="__codelineno-114-18" name="__codelineno-114-18" href="#__codelineno-114-18"></a><span class="w">  </span><span class="s">"user_predict/context_timeout"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000</span>
+</code></pre></div>
+<p>移动端如果只需要上下文调频：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a><span class="nt">patch</span><span class="p">:</span>
+<a id="__codelineno-115-2" name="__codelineno-115-2" href="#__codelineno-115-2"></a><span class="w">  </span><span class="s">"user_predict/mobile_predict_style"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"reorder"</span>
+</code></pre></div>
+<p>移动端如果暂时不需要 User Predict 的 Post / Reorder：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a><span class="nt">patch</span><span class="p">:</span>
+<a id="__codelineno-116-2" name="__codelineno-116-2" href="#__codelineno-116-2"></a><span class="w">  </span><span class="s">"user_predict/mobile_predict_style"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">"off"</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">off 不等于删除数据库</p>
+<p><code>off</code> 只是关闭当前移动端的预测呈现方式。</p>
+<p>历史数据库仍然保留，之后重新切回 <code>post</code> 或 <code>reorder</code> 可以继续使用。</p>
+</div>
+<hr />
+<h2 id="prediction_1">二十七、如何固定开启 <code>prediction</code>？</h2>
+<p>当前 Base 的 <code>switches</code> 中：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a>prediction
+</code></pre></div>
+<p>位于第 6 项。</p>
+<p>列表从 0 开始计数，因此当前 Base 对应：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a><span class="nt">patch</span><span class="p">:</span>
+<a id="__codelineno-118-2" name="__codelineno-118-2" href="#__codelineno-118-2"></a><span class="w">  </span><span class="s">"switches/@5/reset"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</code></pre></div>
+<p>表示方案初始化时默认：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>预测开
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">不要长期把 @5 当作固定接口</p>
+<p><code>@5</code> 只代表<strong>当前 Base 版本中第 6 个 Switch</strong>。</p>
+<p>Pro 或后续版本如果调整了 <code>switches</code> 顺序，索引可能变化。</p>
+<p>因此修改其他方案时，应先检查实际 <code>switches</code> 数组，再确定对应索引。</p>
+</div>
+<hr />
+<h2 id="_22">二十八、当前版本可以怎样理解？</h2>
+<p>当前 User Predict 的核心由以下几部分组成：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a>即时有效学习
+<a id="__codelineno-120-2" name="__codelineno-120-2" href="#__codelineno-120-2"></a>+
+<a id="__codelineno-120-3" name="__codelineno-120-3" href="#__codelineno-120-3"></a>c 值累计
+<a id="__codelineno-120-4" name="__codelineno-120-4" href="#__codelineno-120-4"></a>+
+<a id="__codelineno-120-5" name="__codelineno-120-5" href="#__codelineno-120-5"></a>四级上下文查询
+<a id="__codelineno-120-6" name="__codelineno-120-6" href="#__codelineno-120-6"></a>+
+<a id="__codelineno-120-7" name="__codelineno-120-7" href="#__codelineno-120-7"></a>上下文隔离
+<a id="__codelineno-120-8" name="__codelineno-120-8" href="#__codelineno-120-8"></a>+
+<a id="__codelineno-120-9" name="__codelineno-120-9" href="#__codelineno-120-9"></a>分支竞争裁剪
+<a id="__codelineno-120-10" name="__codelineno-120-10" href="#__codelineno-120-10"></a>+
+<a id="__codelineno-120-11" name="__codelineno-120-11" href="#__codelineno-120-11"></a>负墓碑删除
+<a id="__codelineno-120-12" name="__codelineno-120-12" href="#__codelineno-120-12"></a>+
+<a id="__codelineno-120-13" name="__codelineno-120-13" href="#__codelineno-120-13"></a>事务回滚
+</code></pre></div>
+<p>整体流程可以概括为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a>用户连续上屏
+<a id="__codelineno-121-2" name="__codelineno-121-2" href="#__codelineno-121-2"></a>      ↓
+<a id="__codelineno-121-3" name="__codelineno-121-3" href="#__codelineno-121-3"></a>验证是否属于有效语境
+<a id="__codelineno-121-4" name="__codelineno-121-4" href="#__codelineno-121-4"></a>      ↓
+<a id="__codelineno-121-5" name="__codelineno-121-5" href="#__codelineno-121-5"></a>写入 1 / 2 / P 动态关联
+<a id="__codelineno-121-6" name="__codelineno-121-6" href="#__codelineno-121-6"></a>      ↓
+<a id="__codelineno-121-7" name="__codelineno-121-7" href="#__codelineno-121-7"></a>正 c 累计学习强度
+<a id="__codelineno-121-8" name="__codelineno-121-8" href="#__codelineno-121-8"></a>      ↓
+<a id="__codelineno-121-9" name="__codelineno-121-9" href="#__codelineno-121-9"></a>下次根据 S → 2 → 1 → P 查询
+<a id="__codelineno-121-10" name="__codelineno-121-10" href="#__codelineno-121-10"></a>      ↓
+<a id="__codelineno-121-11" name="__codelineno-121-11" href="#__codelineno-121-11"></a>移动端 Post 或输入中 Reorder
+<a id="__codelineno-121-12" name="__codelineno-121-12" href="#__codelineno-121-12"></a>      ↓
+<a id="__codelineno-121-13" name="__codelineno-121-13" href="#__codelineno-121-13"></a>误选可 Undo
+<a id="__codelineno-121-14" name="__codelineno-121-14" href="#__codelineno-121-14"></a>主动删除写负 c 墓碑
+</code></pre></div>
+<p>S-Gram 则始终保持独立：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-122-1" name="__codelineno-122-1" href="#__codelineno-122-1"></a>人工导入
+<a id="__codelineno-122-2" name="__codelineno-122-2" href="#__codelineno-122-2"></a>→ 静态只读
+<a id="__codelineno-122-3" name="__codelineno-122-3" href="#__codelineno-122-3"></a>→ 高优先级查询
+<a id="__codelineno-122-4" name="__codelineno-122-4" href="#__codelineno-122-4"></a>→ 支持长上文前缀桥接
+</code></pre></div>
+<hr />
+<div align="center" style="opacity: 0.5; font-size: 0.85em; margin-top: 2rem; font-style: italic;">
+    <em>User Predict 当前以稳定 c 值记录用户明确形成的上下文关系：动态关联通过真实输入持续累积，静态 S-Gram 负责固定续句，Post 与 Reorder 则分别解决联想展示和输入中调频。</em>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 万象拼音 · 开源项目文档
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
