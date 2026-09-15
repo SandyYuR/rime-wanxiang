@@ -261,6 +261,40 @@ tone_map = str.maketrans({
 def strip_tone(text):
     return text.replace("m̀", "me").translate(tone_map)
 
+
+def dedup_zi_dict(path):
+    temp = path.with_name(path.name + ".dedup.tmp")
+    best = {}
+
+    with path.open("r", encoding="utf-8", newline="") as src:
+        for line in src:
+            if line.startswith("#"):
+                continue
+
+            parts = line.rstrip("\r\n").split("\t")
+
+            if len(parts) < 3:
+                best.setdefault((line,), (line, -1))
+                continue
+
+            key = (parts[0], parts[1])
+
+            try:
+                weight = float(parts[2])
+            except ValueError:
+                weight = -1
+
+            old = best.get(key)
+
+            if old is None or weight > old[1]:
+                best[key] = (line, weight)
+
+    with temp.open("w", encoding="utf-8", newline="") as dst:
+        for line, _ in best.values():
+            dst.write(line)
+
+    os.replace(temp, path)
+
 dict_dir = Path(sys.argv[1])
 main_dict = Path(sys.argv[2])
 renamed = {}
@@ -324,39 +358,6 @@ if dict_dir.is_dir():
             dedup_zi_dict(new_path)
 
 
-
-def dedup_zi_dict(path):
-    temp = path.with_name(path.name + ".dedup.tmp")
-    best = {}
-
-    with path.open("r", encoding="utf-8", newline="") as src:
-        for line in src:
-            if line.startswith("#"):
-                continue
-
-            parts = line.rstrip("\r\n").split("\t")
-
-            if len(parts) < 3:
-                best.setdefault((line,), (line, -1))
-                continue
-
-            key = (parts[0], parts[1])
-
-            try:
-                weight = float(parts[2])
-            except ValueError:
-                weight = -1
-
-            old = best.get(key)
-
-            if old is None or weight > old[1]:
-                best[key] = (line, weight)
-
-    with temp.open("w", encoding="utf-8", newline="") as dst:
-        for line, _ in best.values():
-            dst.write(line)
-
-    os.replace(temp, path)
 
 def rewrite_imports(path):
     if not path.is_file():
