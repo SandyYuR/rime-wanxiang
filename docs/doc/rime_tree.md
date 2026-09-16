@@ -23,7 +23,7 @@
     * **wanxiang_pure.dict.yaml** —— `Pure 版词库入口`
     * **wanxiang_pure.schema.yaml** —— `Pure 版主方案文件`
 
-* **custom_phrase.txt** —— `自定义短语源文件，用于配置固定编码与置顶候选`
+* **custom_phrase.dict.yaml** —— `自定义短语源文件，用于配置固定编码与置顶候选`
 
 * **default.yaml** —— `Rime 全局默认配置，包括方案列表、快捷键及公共行为`
 

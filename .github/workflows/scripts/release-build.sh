@@ -47,6 +47,7 @@ package_schema_base() {
     --exclude='/dist/' \
     --exclude='/docs/' \
     --exclude='/mkdocs.yml' \
+    --exclude='custom_phrase.txt' \
     --exclude='/release-please-config.json' \
     --exclude='/pro-*-fuzhu-dicts' \
     --exclude='/CHANGELOG.md' \
@@ -166,6 +167,7 @@ package_schema_lite() {
     --exclude='.yamlfmt' \
     --exclude='/custom' \
     --exclude='/LICENSE' \
+    --exclude='custom_phrase.txt' \
     --exclude='/wanxiang.dict.yaml' \
     --exclude='/wanxiang.schema.yaml' \
     --exclude='/wanxiang_lite.dict.yaml' \
@@ -452,10 +454,14 @@ package_schema_pro() {
     --exclude='/docs/' \
     --exclude='/mkdocs.yml' \
     --exclude='.yamlfmt' \
+    --exclude='custom_phrase.txt' \
     --exclude='release-please-config.json' \
     --exclude='pro-*-fuzhu-dicts' \
     --exclude='wanxiang_t9.schema.yaml' \
     --exclude='wanxiang_t9i.schema.yaml' \
+    --exclude='wanxiang_abbrev_t9.dict.yaml' \
+    --exclude='wanxiang_abbrev_t9.schema.yaml' \
+    --exclude='wanxiang_custom_phrase_t9.schema.yaml' \
     --exclude='CHANGELOG.md' \
     --exclude='wanxiang.dict.yaml' \
     --exclude='wanxiang.schema.yaml' \
@@ -539,6 +545,13 @@ package_schema_pure() {
     --exclude='/wanxiang_reverse.schema.yaml' \
     --exclude='/wanxiang_t9.schema.yaml' \
     --exclude='wanxiang_t9i.schema.yaml' \
+    --exclude='wanxiang_abbrev_t9.dict.yaml' \
+    --exclude='wanxiang_abbrev_t9.schema.yaml' \
+    --exclude='wanxiang_custom_phrase_t9.schema.yaml' \
+    --exclude='custom_phrase.dict.yaml' \
+    --exclude='wanxiang_abbrev.dict.yaml' \
+    --exclude='wanxiang_abbrev.schema.yaml' \
+    --exclude='wanxiang_custom_phrase.schema.yaml' \
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \

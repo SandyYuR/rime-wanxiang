@@ -166,10 +166,10 @@ english_date_formats:
 ---
 
 ### 终极应用示例 (txt 词库编写)
-在你的 `lua/data/others.txt` 或 `custom_phrase.txt` 中写入以下内容，即可实现对应的魔法输入体验：
+在你的 `lua/data/others.txt` 或 `custom_phrase.dict.yaml` 中写入以下内容，即可实现对应的魔法输入体验：
 
 ```text
-# 示例 1：古典报时,写在custom_phrase.txt里
+# 示例 1：古典报时,写在custom_phrase.dict.yaml里
 \T\K	csck	5
 
 # 解读：输入csck候选出现输出： -> 1.此时此刻 2.\T\K ，然后卵生候选又被格式化，最终输出： -> 1.此时此刻 2.午时三刻

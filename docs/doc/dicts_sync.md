@@ -11,7 +11,7 @@
 自定义短语是最简单、最轻量的扩展方式，主要适合**短编码触发固定内容**，例如常用短语、特殊符号串、邮箱地址、固定签名等。
 
 !!! tip "工作方式与配置规范"
-    系统会读取用户目录中的文本文件，例如 `custom_phrase.txt`，并将其中的内容作为固定短语加载。
+    系统会读取用户目录中的文本文件，例如 `custom_phrase.dict.yaml`，并将其中的内容作为固定短语加载。
 
     * **数据格式**：`上屏文本\t编码\t组内排序权重`
 
@@ -27,11 +27,45 @@
 
     ```yaml
     patch:
-      # 将自定义短语源文件改为自己维护的 my_phrase.txt
-      "custom_phrase/user_dict": my_phrase
+      # 将自定义短语源文件改为自己维护的 my_phrase.dict.yaml
+      "custom_phrase/dictionary": my_phrase
     ```
 
 这样后续更新万象时，可以保留自己的短语文件，不必反复合并修改。
+
+需要注意你要明确你的方案是哪个用户词方案提供服务，例如九键是**dependencies**字段下**wanxiang_custom_phrase_t9**方案提供服务，如下：
+
+```
+schema:
+  schema_id: wanxiang_t9
+  name: 万象九键
+  version: "LTS"
+  author:
+    - amzxyz
+  description: |
+    万象拼音九宫格公共方案
+  dependencies:
+    - wanxiang_abbrev_t9  #公共简码库
+    - wanxiang_custom_phrase_t9  #自定义词库
+```
+
+那么除了给**wanxiang.custom.yaml**写入
+
+```yaml
+patch:
+  # 将自定义短语源文件改为自己维护的 my_phrase.dict.yaml
+  "custom_phrase/dictionary": my_phrase
+```
+
+还需要给**wanxiang_custom_phrase_t9.custom.yaml**写入
+
+```yaml
+patch:
+  # 将自定义短语源文件改为自己维护的 my_phrase.dict.yaml
+  "translator/dictionary": my_phrase
+```
+
+这样生成端和使用端才对上号了！相关的patch在后面固定词库的自定义中还会进一步阐述。
 
 ---
 

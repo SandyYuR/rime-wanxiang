@@ -558,8 +558,8 @@ patch:
 
 ```yaml title="左：wanxiang.schema.yaml"
 custom_phrase:
-  user_dict: custom_phrase
-  db_class: stabledb
+  dictionary: custom_phrase
+
 
 wanxiang_english:
   english_spacing: smart
@@ -572,7 +572,7 @@ patch:
   wanxiang_english/english_spacing: after
   
   # 更改自定义短语词典名称，更新不会被覆盖
-  custom_phrase/user_dict: custom_phrasexxx
+  custom_phrase/dictionary: custom_phrasexxx
 ```
 
 </div>

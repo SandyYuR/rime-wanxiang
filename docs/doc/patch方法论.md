@@ -245,7 +245,7 @@ patch:
 
 ```yaml
 patch:
-  custom_phrase/user_dict:
+  custom_phrase/dictionary:
   custom_phrase/initial_quality:
 ```
 

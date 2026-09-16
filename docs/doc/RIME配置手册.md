@@ -382,10 +382,8 @@ translator:
 `luna_pinyin.schema.yaml` 明月拼音用户短语
 
 ```yaml
-custom_phrase: #这是一个table_translator
-  dictionary: ""
-  user_dict: custom_phrase
-  db_class: tabledb
+custom_phrase:
+  dictionary: custom_phrase
   enable_sentence: false
   enable_completion: false
   initial_quality: 1

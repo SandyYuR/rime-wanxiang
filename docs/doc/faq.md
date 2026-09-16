@@ -285,7 +285,7 @@ wanxiang_english:
 
 ### Q：我只是想加邮箱、地址、签名、固定短语，应该改主词库吗？
 
-**不用，优先使用 `custom_phrase.txt`。**
+**不用，优先使用 `custom_phrase.dict.yaml`。**
 
 它就是给固定内容和短编码准备的，例如：
 
@@ -308,24 +308,20 @@ example@example.com	mail	100
 
 ---
 
-### Q：`custom_phrase.txt` 明明写了内容，为什么不生效？
+### Q：`custom_phrase.dict.yaml` 明明写了内容，为什么不生效？
 
 依次检查：
 
-- 文件是否真的叫 `custom_phrase.txt`，有没有被系统保存成 `custom_phrase.txt.txt`；
 - 列与列之间是不是 **Tab**；
 - 文件编码是否正常；
-- `custom_phrase/user_dict` 是否仍然指向 `custom_phrase`；
-- 是否擅自修改了 `db_class`；
+- `custom_phrase/dictionary` 是否仍然指向 `custom_phrase`；
 - 保存后有没有重新部署。
 
 万象当前默认：
 
 ```yaml
 custom_phrase:
-  dictionary: ""
-  user_dict: custom_phrase
-  db_class: stabledb
+  dictionary: custom_phrase
   enable_completion: false
   enable_sentence: false
   initial_quality: 99
@@ -339,7 +335,7 @@ custom_phrase:
 
 可以这样理解：
 
-**固定少量内容** → `custom_phrase.txt`  
+**固定少量内容** → `custom_phrase.dict.yaml`  
 **大量专业词、长期维护的数据** → 独立 `.dict.yaml` 并通过 Patch 挂载  
 **日常输入产生的动态学习** → 主翻译器用户词库  
 **我明确想记住一个新词** → 万象的自造词 / 无感造词机制
@@ -445,11 +441,11 @@ wanxiang.userdb.txt
 
 ---
 
-### Q：`custom_phrase.txt` 会跟着 UserDB 自动同步吗？
+### Q：`custom_phrase.dict.yaml` 会跟着 UserDB 自动同步吗？
 
 它本质上是你自己维护的固定文本文件，不等同于输入过程中产生的 UserDB。
 
-如果你希望多设备共用同一份 `custom_phrase.txt`，可以用自己的网盘、Git 或其他文件同步方式管理；不要把“Rime 用户词同步”和“任意配置文件同步”当成一回事。你可以选择在一个地方维护变更，其他设备都只是单向下载你的更新。这与UserDB多个设备文件夹合并数据是不同的。
+如果你希望多设备共用同一份 `custom_phrase.dict.yaml`，可以用自己的网盘、Git 或其他文件同步方式管理；不要把“Rime 用户词同步”和“任意配置文件同步”当成一回事。你可以选择在一个地方维护变更，其他设备都只是单向下载你的更新。这与UserDB多个设备文件夹合并数据是不同的。
 
 ---
 
@@ -668,7 +664,7 @@ wanxiang_english/dictionary: wanxiang_english_user
 
 ### Q：`AI绘画`、型号、品牌、英文缩写这类中英混合词应该放哪里？
 
-少量固定内容可以直接放 `custom_phrase.txt`。
+少量固定内容可以直接放 `custom_phrase.dict.yaml`。
 
 如果是成体系的中文 + 英文 + 数字 + 符号混合词汇，则更适合使用万象的 `wanxiang_mixedcode` 数据体系，而不是把所有混合词都塞进普通中文用户词。
 

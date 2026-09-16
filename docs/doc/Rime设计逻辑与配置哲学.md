@@ -477,9 +477,8 @@ engine:
 
 ```yaml
 custom_phrase:
-  dictionary: ""
-  user_dict: custom_phrase
-  db_class: stabledb
+  dictionary: custom_phrase
+
 
 wanxiang_english:
   dictionary: wanxiang_english
