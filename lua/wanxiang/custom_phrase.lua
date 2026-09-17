@@ -27,6 +27,8 @@
 --   - name: abbrev
 --     states: [简码关, 简码开]
 
+local wanxiang = require("wanxiang/wanxiang")
+
 local M = {}
 
 local function passthrough(input)
@@ -92,7 +94,11 @@ function M.func(input, env)
         return
     end
 
-    local abbrev_enabled = context:get_option("abbrev") and env.max_candidates > 0
+    local input_type = wanxiang.get_input_method_type(env)
+    local abbrev_enabled =
+        context:get_option("abbrev")
+        and env.max_candidates > 0
+        and input_type ~= "pinyin"
     local reserved = {}
     local custom = {}
 
