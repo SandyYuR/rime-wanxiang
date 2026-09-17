@@ -36,30 +36,28 @@ build_opencc_wanxiang() {
 
   cd "$OPENCC_DIR"
 
-  for f in \
-    emoji \
-    HKVariants \
-    STCharacters \
-    STPhrases \
-    TWVariants
-  do
-    if [[ -f "${f}.txt" ]]; then
-      sed -i '/^#/d' "${f}.txt"
+  for f in *.txt; do
+    [[ -f "$f" ]] || continue
 
-      opencc_dict \
-        -i "${f}.txt" \
-        -o "${f}.ocd2" \
-        -f text \
-        -t ocd2
-    fi
+    # 保留自定义文件，不转换不删除
+    case "$f" in
+      Custom_STPhrases.txt|Custom_Emoji.txt)
+        continue
+        ;;
+    esac
+
+    echo "build opencc: $f"
+
+    sed -i '/^#/d' "$f"
+
+    opencc_dict \
+      -i "$f" \
+      -o "${f%.txt}.ocd2" \
+      -f text \
+      -t ocd2
+
+    rm -f "$f"
   done
-
-  rm -f \
-    emoji.txt \
-    HKVariants.txt \
-    STCharacters.txt \
-    STPhrases.txt \
-    TWVariants.txt
 
   cd "$ROOT_DIR"
 }
