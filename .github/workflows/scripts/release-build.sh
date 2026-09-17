@@ -21,6 +21,53 @@ python3 "$ROOT_DIR/.github/workflows/scripts/aux_go.py"
 echo "✅ PRO 分包完毕"
 echo
 
+
+build_opencc_wanxiang() {
+  OPENCC_DIR="$ROOT_DIR/opencc/wanxiang"
+
+  if [[ ! -d "$OPENCC_DIR" ]]; then
+    echo "⚠️ opencc/wanxiang 不存在，跳过 OpenCC 编译"
+    return
+  fi
+
+  command -v opencc_dict >/dev/null 2>&1 || {
+    echo "错误: 未找到 opencc_dict，请先安装 OpenCC"
+    exit 1
+  }
+
+  echo "▶️ 编译 wanxiang OpenCC ocd2"
+
+  cd "$OPENCC_DIR"
+
+  for f in \
+    emoji \
+    HKVariants \
+    STCharacters \
+    STPhrases \
+    TWVariants
+  do
+    if [[ -f "${f}.txt" ]]; then
+      opencc_dict \
+        -i "${f}.txt" \
+        -o "${f}.ocd2" \
+        -f text \
+        -t ocd2
+    fi
+  done
+
+  # 仅保留用户自定义 txt，其余 txt 不进入产物
+  rm -f \
+    emoji.txt \
+    HKVariants.txt \
+    STCharacters.txt \
+    STPhrases.txt \
+    TWVariants.txt
+
+  cd "$ROOT_DIR"
+
+  echo "✅ wanxiang OpenCC ocd2 完成"
+}
+
 package_schema_base() {
   OUT_DIR=$1
   rm -rf "$OUT_DIR"
@@ -53,6 +100,9 @@ package_schema_base() {
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \
+     --exclude='/opencc/wanxiang/*.txt' \
+     --include='/opencc/wanxiang/Custom_Emoji.txt' \
+     --include='/opencc/wanxiang/Custom_STPhrases.txt' \
     --exclude='/LICENSE' \
     --exclude="/$OUT_BASE" \
     "$ROOT_DIR/" "$OUT_DIR/"
@@ -166,6 +216,9 @@ package_schema_lite() {
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \
+    --include='/opencc/wanxiang/Custom_Emoji.txt' \
+    --include='/opencc/wanxiang/Custom_STPhrases.txt' \
+    --exclude='/opencc/wanxiang/*.txt' \
     --exclude='/LICENSE' \
     --exclude='custom_phrase.txt' \
     --exclude='/wanxiang.dict.yaml' \
@@ -557,6 +610,9 @@ package_schema_pure() {
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \
+    --include='/opencc/wanxiang/Custom_Emoji.txt' \
+    --include='/opencc/wanxiang/Custom_STPhrases.txt' \
+    --exclude='/opencc/wanxiang/*.txt' \
     --exclude='/LICENSE' \
     "$ROOT_DIR/" "$OUT_DIR/"
 
@@ -565,6 +621,8 @@ package_schema_pure() {
 }
 
 package_schema() {
+  build_opencc_wanxiang
+
   SCHEMA_NAME="$1"
   echo "▶️ 开始打包方案：$SCHEMA_NAME"
 
