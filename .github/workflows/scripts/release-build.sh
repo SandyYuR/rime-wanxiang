@@ -96,9 +96,6 @@ package_schema_base() {
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \
-     --exclude='/opencc/wanxiang/*.txt' \
-     --include='/opencc/wanxiang/Custom_Emoji.txt' \
-     --include='/opencc/wanxiang/Custom_STPhrases.txt' \
     --exclude='/LICENSE' \
     --exclude="/$OUT_BASE" \
     "$ROOT_DIR/" "$OUT_DIR/"
@@ -212,9 +209,6 @@ package_schema_lite() {
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \
-    --include='/opencc/wanxiang/Custom_Emoji.txt' \
-    --include='/opencc/wanxiang/Custom_STPhrases.txt' \
-    --exclude='/opencc/wanxiang/*.txt' \
     --exclude='/LICENSE' \
     --exclude='custom_phrase.txt' \
     --exclude='/wanxiang.dict.yaml' \
@@ -606,9 +600,6 @@ package_schema_pure() {
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \
-    --include='/opencc/wanxiang/Custom_Emoji.txt' \
-    --include='/opencc/wanxiang/Custom_STPhrases.txt' \
-    --exclude='/opencc/wanxiang/*.txt' \
     --exclude='/LICENSE' \
     "$ROOT_DIR/" "$OUT_DIR/"
 
