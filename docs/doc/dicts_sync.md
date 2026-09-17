@@ -33,7 +33,7 @@
 
 这样后续更新万象时，可以保留自己的短语文件，不必反复合并修改。
 
-需要注意你要明确你的方案是哪个用户词方案提供服务，例如九键是**dependencies**字段下**wanxiang_custom_phrase_t9**方案提供服务，如下：
+需要注意你要明确你的方案是哪个用户词方案提供服务，例如九键是**dependencies**字段下**wanxiang_phrase_t9**方案提供服务，如下：
 
 ```
 schema:
@@ -46,7 +46,7 @@ schema:
     万象拼音九宫格公共方案
   dependencies:
     - wanxiang_abbrev_t9  #公共简码库
-    - wanxiang_custom_phrase_t9  #自定义词库
+    - wanxiang_phrase_t9  #自定义词库
 ```
 
 那么除了给**wanxiang.custom.yaml**写入
@@ -57,7 +57,7 @@ patch:
   "custom_phrase/dictionary": my_phrase
 ```
 
-还需要给**wanxiang_custom_phrase_t9.custom.yaml**写入
+还需要给**wanxiang_phrase_t9.custom.yaml**写入
 
 ```yaml
 patch:

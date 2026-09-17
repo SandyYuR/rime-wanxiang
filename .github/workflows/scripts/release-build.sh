@@ -461,7 +461,7 @@ package_schema_pro() {
     --exclude='wanxiang_t9i.schema.yaml' \
     --exclude='wanxiang_abbrev_t9.dict.yaml' \
     --exclude='wanxiang_abbrev_t9.schema.yaml' \
-    --exclude='wanxiang_custom_phrase_t9.schema.yaml' \
+    --exclude='wanxiang_phrase_t9.schema.yaml' \
     --exclude='CHANGELOG.md' \
     --exclude='wanxiang.dict.yaml' \
     --exclude='wanxiang.schema.yaml' \
@@ -547,11 +547,11 @@ package_schema_pure() {
     --exclude='wanxiang_t9i.schema.yaml' \
     --exclude='wanxiang_abbrev_t9.dict.yaml' \
     --exclude='wanxiang_abbrev_t9.schema.yaml' \
-    --exclude='wanxiang_custom_phrase_t9.schema.yaml' \
+    --exclude='wanxiang_phrase_t9.schema.yaml' \
     --exclude='custom_phrase.dict.yaml' \
     --exclude='wanxiang_abbrev.dict.yaml' \
     --exclude='wanxiang_abbrev.schema.yaml' \
-    --exclude='wanxiang_custom_phrase.schema.yaml' \
+    --exclude='wanxiang_phrase.schema.yaml' \
     --exclude='/CHANGELOG.md' \
     --exclude='.yamlfmt' \
     --exclude='/custom' \

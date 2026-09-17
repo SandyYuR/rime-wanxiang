@@ -369,7 +369,7 @@ table_translator
 custom_phrase:
 
   dictionary: custom_phrase
-  prism: custom_phrase_t9
+  prism: wanxiang_phrase_t9
 
   enable_user_dict: false
   enable_completion: false
