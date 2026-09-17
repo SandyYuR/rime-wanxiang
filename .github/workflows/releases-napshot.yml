@@ -213,6 +213,11 @@ jobs:
             git fetch --no-tags --depth=1 origin \
               "refs/heads/${branch}:refs/remotes/origin/${branch}"
 
+            # release-build.sh 会在前面生成 opencc/wanxiang/*.ocd2。
+            # 这些文件最终会由 snapshot rsync 回产物分支，
+            # 这里先移除工作区残留，避免 checkout 到产物分支时被未跟踪文件阻塞。
+            rm -f opencc/wanxiang/*.ocd2
+
             git checkout -B "${branch}" "refs/remotes/origin/${branch}"
 
             rsync -a --delete \
