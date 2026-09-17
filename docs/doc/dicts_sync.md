@@ -37,16 +37,14 @@
 
 ```
 schema:
-  schema_id: wanxiang_t9
-  name: 万象九键
-  version: "LTS"
-  author:
-    - amzxyz
-  description: |
-    万象拼音九宫格公共方案
+  schema_id: wanxiang
+  ...
   dependencies:
-    - wanxiang_abbrev_t9  #公共简码库
-    - wanxiang_phrase_t9  #自定义词库
+    - wanxiang_mixedcode  #混合编码
+    - wanxiang_reverse  #部件拆字，反查及辅码
+    - wanxiang_english  #英文
+    - wanxiang_abbrev  #公共简码库
+    - wanxiang_phrase  #用户词库
 ```
 
 那么除了给**wanxiang.custom.yaml**写入
@@ -57,7 +55,7 @@ patch:
   "custom_phrase/dictionary": my_phrase
 ```
 
-还需要给**wanxiang_phrase_t9.custom.yaml**写入
+还需要给**wanxiang_phrase.custom.yaml**写入
 
 ```yaml
 patch:
