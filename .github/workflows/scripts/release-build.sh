@@ -26,16 +26,13 @@ build_opencc_wanxiang() {
   OPENCC_DIR="$ROOT_DIR/opencc/wanxiang"
 
   if [[ ! -d "$OPENCC_DIR" ]]; then
-    echo "⚠️ opencc/wanxiang 不存在，跳过 OpenCC 编译"
     return
   fi
 
-  command -v opencc_dict >/dev/null 2>&1 || {
-    echo "错误: 未找到 opencc_dict，请先安装 OpenCC"
-    exit 1
-  }
-
-  echo "▶️ 编译 wanxiang OpenCC ocd2"
+  if ! command -v opencc_dict >/dev/null 2>&1; then
+    sudo apt-get update
+    sudo apt-get install -y opencc
+  fi
 
   cd "$OPENCC_DIR"
 
@@ -47,6 +44,8 @@ build_opencc_wanxiang() {
     TWVariants
   do
     if [[ -f "${f}.txt" ]]; then
+      sed -i '/^#/d' "${f}.txt"
+
       opencc_dict \
         -i "${f}.txt" \
         -o "${f}.ocd2" \
@@ -55,7 +54,6 @@ build_opencc_wanxiang() {
     fi
   done
 
-  # 仅保留用户自定义 txt，其余 txt 不进入产物
   rm -f \
     emoji.txt \
     HKVariants.txt \
@@ -64,8 +62,6 @@ build_opencc_wanxiang() {
     TWVariants.txt
 
   cd "$ROOT_DIR"
-
-  echo "✅ wanxiang OpenCC ocd2 完成"
 }
 
 package_schema_base() {
