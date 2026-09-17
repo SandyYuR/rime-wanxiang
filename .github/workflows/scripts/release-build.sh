@@ -512,6 +512,8 @@ package_schema_pure() {
     --exclude='wanxiang.custom.yaml' \
     --exclude='wanxiang.dict.yaml' \
     --exclude='wanxiang.schema.yaml' \
+    --exclude='wanxiang_abbrev.custom.yaml' \
+    --exclude='wanxiang_phrase.custom.yaml' \
     --exclude='wanxiang_pure.schema.yaml' \
     --exclude='wanxiang_pure.dict.yaml' \
     --exclude='wanxiang_mixedcode.custom.yaml' \
