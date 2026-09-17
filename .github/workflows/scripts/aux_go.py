@@ -267,7 +267,7 @@ if __name__ == '__main__':
     INPUT_DIR = "dicts"
     OUT_ROOT = "."
 
-    BLACKLIST_FILES = {"mixed.dict.yaml", "en.dict.yaml"}
+    BLACKLIST_FILES = {"mixed.dict.yaml", "en.dict.yaml", "abbrev.dict.yaml", "t9_abbrev.dict.yaml"}
     OUTPUT_SUFFIX = ".pro"
 
     scheme_aux, scheme_chaifen, _ = parse_csv_all(CSV_PATH)
