@@ -345,7 +345,7 @@ renamed = {}
 if dict_dir.is_dir():
     paths = [
         path for path in dict_dir.rglob("*.dict.yaml")
-        if path.name not in {"en.dict.yaml", "mixed.dict.yaml"}
+        if path.name not in {"en.dict.yaml", "mixed.dict.yaml", "abbrev.dict.yaml", "t9_abbrev.dict.yaml"}
         and not path.name.endswith(".lite.dict.yaml")
     ]
 
