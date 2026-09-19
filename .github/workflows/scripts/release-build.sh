@@ -482,6 +482,9 @@ package_schema_pro() {
     --exclude='wanxiang_pure.dict.yaml' \
     --exclude='wanxiang_pure.schema.yaml' \
     --exclude='wanxiang_pure.custom.yaml' \
+    --exclude='wanxiang_lite.custom.yaml' \
+    --exclude='wanxiang_lite.dict.yaml' \
+    --exclude='wanxiang_lite.schema.yaml' \
     --include='*.yaml' --include='*.md' --include='*.jpg' --include='*.png' \
     --exclude='*' \
     "$ROOT_DIR/custom/" "$OUT_DIR/custom/"
@@ -560,6 +563,9 @@ package_schema_pure() {
     --exclude='wanxiang_mixedcode.custom.yaml' \
     --exclude='wanxiang_english.custom.yaml' \
     --exclude='wanxiang_reverse.custom.yaml' \
+    --exclude='wanxiang_lite.custom.yaml' \
+    --exclude='wanxiang_lite.dict.yaml' \
+    --exclude='wanxiang_lite.schema.yaml' \
     --include='*.yaml' --include='*.md' --include='*.jpg' --include='*.png' \
     --exclude='*' \
     "$CUSTOM_DIR/" "$OUT_DIR/custom/"
