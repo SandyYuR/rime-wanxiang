@@ -19,7 +19,11 @@
     - 建议用 VS Code、Sublime Text 等能显示 Tab 和编码的编辑器，避免格式错误。
 
 
-长期维护的短语建议单独建文件，并通过 `wanxiang.custom.yaml` 改调用路径，不要直接改万象默认文件。
+长期维护的短语建议单独建文件，并通过 `wanxiang.custom.yaml` 改调用路径，不要直接改万象默认文件。不同于传统TXT引用
+
+- 词库引入可编译成bin性能更好
+- 在共键方案中，如输入597打出静夜思，编码区显示jys
+- 被Lua管理，有更高效的组织置顶词和简词关系
 
 注意：先确认你的方案由哪个用户词方案提供服务。例如九键对应 `wanxiang_phrase_t9`，普通方案通常是 `wanxiang_phrase`。在 `dependencies` 中一般能看到：
 
@@ -35,13 +39,13 @@ dependencies:
 所以，改自定义短语时，生成端和使用端都要改：
 
 ```yaml
-# wanxiang.custom.yaml：生成端
+# wanxiang.custom.yaml：使用端
 patch:
   "custom_phrase/dictionary": my_phrase
 ```
 
 ```yaml
-# wanxiang_phrase.custom.yaml：使用端
+# wanxiang_phrase.custom.yaml：生成端
 patch:
   "translator/dictionary": my_phrase
 ```
@@ -49,13 +53,13 @@ patch:
 如果还要使用简码插入，也要同样成对修改：
 
 ```yaml
-# wanxiang.custom.yaml：生成端
+# wanxiang.custom.yaml：使用端
 patch:
   "abbrev_phrase/dictionary": my_abbrev
 ```
 
 ```yaml
-# wanxiang_phrase.custom.yaml：使用端
+# wanxiang_phrase.custom.yaml：生成端
 patch:
   "translator/dictionary": my_abbrev
 ```
