@@ -6,64 +6,67 @@
 
 ---
 
-## 1. 自定义短语 (Custom Phrase)：适合固定内容快速上屏
+## 1. 自定义短语：固定内容快速上屏
 
-自定义短语是最简单、最轻量的扩展方式，主要适合**短编码触发固定内容**，例如常用短语、特殊符号串、邮箱地址、固定签名等。
+自定义短语适合用短编码触发固定内容，如常用短语、符号串、邮箱、签名等。不能同步、不能同步、不能同步，只能备份。
 
 !!! tip "工作方式与配置规范"
-    系统会读取用户目录中的文本文件，例如 `custom_phrase.dict.yaml`，并将其中的内容作为固定短语加载。
+    系统会读取用户目录中的文本文件，例如 `custom_phrase.dict.yaml`，并将其内容作为固定短语加载。
 
-    * **数据格式**：`上屏文本\t编码\t组内排序权重`
+    - **格式**：`上屏文本\t编码\t排序权重`
+    - `\t` 必须是 Tab，不能用空格代替。
+    - 排序权重越大，同编码下越靠前。
+    - 建议用 VS Code、Sublime Text 等能显示 Tab 和编码的编辑器，避免格式错误。
 
-      其中 `\t` 表示 **Tab 制表符**，不能使用普通空格代替。
 
-    * **排序规则**：最后一列数字用于控制相同编码下词条在该文件内部的排序，数值越大，位置越靠前。Custom Phrase 本身通常用于提供优先显示的固定候选。
+长期维护的短语建议单独建文件，并通过 `wanxiang.custom.yaml` 改调用路径，不要直接改万象默认文件。
 
-    * **编辑工具**：建议使用 VS Code、Sublime Text 等能够明确显示编码和制表符的文本编辑器，避免因为 Tab、文件编码等问题造成格式错误。
-
-    **避免更新覆盖**
-
-    如果需要长期维护自己的短语文件，建议新建独立文件，并通过 `wanxiang.custom.yaml` 修改调用路径，而不是直接修改万象随版本提供的默认文件。
-
-    ```yaml
-    patch:
-      # 将自定义短语源文件改为自己维护的 my_phrase.dict.yaml
-      "custom_phrase/dictionary": my_phrase
-    ```
-
-这样后续更新万象时，可以保留自己的短语文件，不必反复合并修改。
-
-需要注意你要明确你的方案是哪个用户词方案提供服务，例如九键是**dependencies**字段下**wanxiang_phrase_t9**方案提供服务，如下：
-
-```
-schema:
-  schema_id: wanxiang
-  ...
-  dependencies:
-    - wanxiang_mixedcode  #混合编码
-    - wanxiang_reverse  #部件拆字，反查及辅码
-    - wanxiang_english  #英文
-    - wanxiang_abbrev  #公共简码库
-    - wanxiang_phrase  #用户词库
-```
-
-那么除了给**wanxiang.custom.yaml**写入
+注意：先确认你的方案由哪个用户词方案提供服务。例如九键对应 `wanxiang_phrase_t9`，普通方案通常是 `wanxiang_phrase`。在 `dependencies` 中一般能看到：
 
 ```yaml
+dependencies:
+  - wanxiang_mixedcode  # 混合编码
+  - wanxiang_reverse    # 部件拆字、反查及辅码
+  - wanxiang_english    # 英文
+  - wanxiang_abbrev     # 公共简码库
+  - wanxiang_phrase     # 用户词库
+```
+
+所以，改自定义短语时，生成端和使用端都要改：
+
+```yaml
+# wanxiang.custom.yaml：生成端
 patch:
-  # 将自定义短语源文件改为自己维护的 my_phrase.dict.yaml
   "custom_phrase/dictionary": my_phrase
 ```
 
-还需要给**wanxiang_phrase.custom.yaml**写入
-
 ```yaml
+# wanxiang_phrase.custom.yaml：使用端
 patch:
-  # 将自定义短语源文件改为自己维护的 my_phrase.dict.yaml
   "translator/dictionary": my_phrase
 ```
 
-这样生成端和使用端才对上号了！相关的patch在后面固定词库的自定义中还会进一步阐述。
+如果还要使用简码插入，也要同样成对修改：
+
+```yaml
+# wanxiang.custom.yaml：生成端
+patch:
+  "abbrev_phrase/dictionary": my_abbrev
+```
+
+```yaml
+# wanxiang_phrase.custom.yaml：使用端
+patch:
+  "translator/dictionary": my_abbrev
+```
+
+定义后将默认携带的 
+
+custom_phrase.dict.yaml 修改成 my_phrase.dict.yaml 打开将内部name修改为：my_phrase
+
+wanxiang_abbrev.dict.yaml 修改成 my_abbrev.dict.yaml 打开将内部name修改为：my_abbrev
+
+只有生成端和使用端对上，配置才会生效。相关 patch 在后面的固定词库自定义中还会继续说明。
 
 ---
 
